@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Box } from '@chakra-ui/react';
 import { QueryStatus } from '@reduxjs/toolkit/query';
 import { getCurrentGameId } from '../api/gameApi';
@@ -33,8 +33,13 @@ export const MainContainer: FC = () => {
   }, [gameId, gameStartedAt]);
   
   useEffect(() => {
-    if (getGameResponse.status === QueryStatus.fulfilled) {
+    if (getGameResponse.status !== QueryStatus.fulfilled) {
+      return;
+    }
+    if (getGameResponse.data?.gameId) {
       dispatch(createNew(getGameResponse.data));
+    } else {
+      resetGame();
     }
   }, [getGameResponse, dispatch]);
   

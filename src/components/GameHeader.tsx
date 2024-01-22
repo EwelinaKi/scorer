@@ -1,6 +1,5 @@
 import {
-  Box,
-  Button,
+  Button, Flex,
   Modal, ModalBody,
   ModalCloseButton,
   ModalContent, ModalFooter,
@@ -11,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { useAppSelector } from '../store/hooks';
 import { RootState } from '../store/store';
 
@@ -37,7 +36,7 @@ export const GameHeader: FC<GameHeaderProps> = ({resetGameId}) => {
   
   return (
     <>
-      <Box bg={'gray.600'} p={2}>
+      <Flex bg={'gray.600'} p={2}>
         <Text
           as="i"
           fontSize="xs"
@@ -46,14 +45,13 @@ export const GameHeader: FC<GameHeaderProps> = ({resetGameId}) => {
           <Button
             size="xs"
             ml={1}
-            colorScheme="gray"
-            variant="ghost"
+            colorScheme='blackAlpha'
             onClick={onOpen}
           >
             <FontAwesomeIcon icon={faArrowsRotate} color="pink"/>
           </Button>
         </Text>
-      </Box>
+      </Flex>
       <Modal onClose={onClose} size="xs" isOpen={isOpen}>
         <ModalOverlay/>
         <ModalContent>
