@@ -65,7 +65,7 @@ export const AddPlayerModal: FC<AddPlayerModalProps> = ({isOpen, closeModal}) =>
   
   useEffect(() => {
     if (playerResp.status === QueryStatus.fulfilled) {
-      dispatch(updatePlayers([playerResp.data]));
+      dispatch(updatePlayers([{...playerResp.data, avatar}]));
     }
   }, [playerResp]);
   

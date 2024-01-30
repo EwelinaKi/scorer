@@ -1,19 +1,14 @@
 import {
-  Button, Flex,
-  Modal, ModalBody,
-  ModalCloseButton,
-  ModalContent, ModalFooter,
-  ModalHeader,
-  ModalOverlay,
+  Button,
+  Flex,
   Text,
   useDisclosure
 } from '@chakra-ui/react';
-import { faArrowsRotate, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { useAppSelector } from '../store/hooks';
 import { RootState } from '../store/store';
-import { AddPlayerModal } from './modals/AddPlayerModal';
 import { FinishGameModal } from './modals/FinishGameModal';
 
 
@@ -26,11 +21,6 @@ export const Header: FC<GameHeaderProps> = ({resetGameId}) => {
     isOpen: isFinishModalOpen,
     onClose: onCloseFinishModal,
     onOpen: onOpenFinishModal,
-  } = useDisclosure();
-  const {
-    isOpen: isAddPlayerModalOpen,
-    onClose: onCloseAddPlayerModal,
-    onOpen: onOpenAddPlayerModal,
   } = useDisclosure();
   const startedAt = useAppSelector((state: RootState) => state.game.startedAt);
   const [dateString, setDateString] = useState('');
@@ -57,18 +47,9 @@ export const Header: FC<GameHeaderProps> = ({resetGameId}) => {
           >
             <FontAwesomeIcon icon={faArrowsRotate} color='pink'/>
           </Button>
-          <Button
-            size='xs'
-            ml={1}
-            colorScheme='blackAlpha'
-            onClick={onOpenAddPlayerModal}
-          >
-            <FontAwesomeIcon icon={faUserPlus} color='pink'/>
-          </Button>
         </Text>
       </Flex>
       <FinishGameModal isOpen={isFinishModalOpen} onClose={onCloseFinishModal} resetGameId={resetGameId}/>
-      <AddPlayerModal isOpen={isAddPlayerModalOpen} closeModal={onCloseAddPlayerModal}/>
     </>
   );
 };

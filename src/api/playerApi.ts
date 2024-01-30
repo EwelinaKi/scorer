@@ -1,5 +1,3 @@
-import { BaseQueryMeta, BaseQueryResult } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
-import { GameState } from '../types/game.types';
 import { Player, PostPlayerScore } from '../types/player.types';
 import { api } from './api';
 
@@ -8,6 +6,7 @@ export const playerApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getPlayer: builder.mutation<Player, string>({
       query: (gameId: string) => `players/${gameId}`,
+      // todo transform resp to return players object with avatars
     }),
     changePlayersScore: builder.mutation<Player, PostPlayerScore>({
       query: ({playerId, score}) => {
@@ -19,6 +18,7 @@ export const playerApi = api.injectEndpoints({
           }
         };
       },
+      // fix for existing api bug which returns nullish id
       transformResponse: (resp: Player, meta, arg): Player => {
         return {
           ...resp,

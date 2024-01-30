@@ -17,29 +17,28 @@ import { ScoreWrapper } from './ScoreWrapper';
 
 export const PlayerCard: FC<Player> = ({color, id, name, scores}) => {
   return (
-    
-    <Card maxW="md">
+    <Card maxW='xs' margin={2}>
       <CardHeader>
         <Flex>
-          <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-            <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo"/>
+          <Flex flex='1' gap="4" alignItems='center' flexWrap='wrap'>
+            <Avatar name='Segun Adebayo' src='https://bit.ly/sage-adebayo'/>
             <Box>
-              <Heading size="sm">{name}</Heading>
-              <Text>Score: {scores?.reduce((acc, curr) => acc + curr, 0)}</Text>
+              <Heading size='sm'>{name}</Heading>
+              <Text as='i'>score: {scores?.reduce((acc, curr) => acc + curr, 0)}</Text>
             </Box>
           </Flex>
           <IconButton
-            variant="ghost"
-            colorScheme="gray"
-            aria-label="See menu"
+            variant='ghost'
+            colorScheme='gray'
+            aria-label='See menu'
+            isDisabled={true}
             icon={<BsThreeDotsVertical/>}
           />
         </Flex>
       </CardHeader>
-      <CardBody>
-        <ScoreWrapper playerId={id}/>
+      <CardBody pt='0'>
+        <ScoreWrapper playerId={id} color={color}/>
       </CardBody>
-    
     </Card>
   );
 };

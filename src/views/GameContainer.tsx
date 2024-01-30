@@ -56,7 +56,7 @@ export const GameContainer: FC<GameContainerProps> = ({resetGameId}) => {
       <GridItem bg='pink.300' area={'leaderboard'} minW='360px'>
         <LeaderBoard/>
       </GridItem>
-      <GridItem bg='green.300' area={'players'} minW='360px'>
+      <GridItem area={'players'} minW={['360px', '360px', '680px']}>
         <Players/>
       </GridItem>
       <GridItem bg='blue.300' area={'moves'} minW='360px' >

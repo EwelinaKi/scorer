@@ -1,56 +1,89 @@
-import { Button, HStack } from '@chakra-ui/react';
-import { FC, useState } from 'react';
-import { BiLike } from 'react-icons/all';
-import { usePostNewGameMutation } from '../api/gameApi';
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { FC, useEffect, useState } from 'react';
 import { useChangePlayersScoreMutation } from '../api/playerApi';
 import { useAppDispatch } from '../store/hooks';
-import { updatePlayers } from '../store/playerSlice';
+import { updatePlayerScore } from '../store/playerSlice';
 
 
-const Buttons = [-10, -1, 1, 10];
+const Buttons = [1, 2, 5, 10, 20, 50, -1, -2, -5, -10, -20, -50];
 
 interface ScoreWrapperProps {
   playerId: string,
+  color: string,
 }
 
-export const ScoreWrapper: FC<ScoreWrapperProps> = ({playerId}) => {
+export const ScoreWrapper: FC<ScoreWrapperProps> = ({playerId, color}) => {
+  const getScoreString = (value: number): string => {
+    if (value == 0) {
+      return '--';
+    } else if (value > 0) {
+      return `+${value}`;
+    } else {
+      return value.toString();
+    }
+  };
+  
   const [score, setScore] = useState(0);
-  const [postNewGame, gameResponse] = usePostNewGameMutation();
+  const [scoreString, setScoreString] = useState(getScoreString(0));
   const [postNewScore, newScoreResp] = useChangePlayersScoreMutation();
   const dispatch = useAppDispatch();
   
   const addPointsForPlayer = () => {
-    console.log('addPoints', playerId, score);
-    
     postNewScore({playerId, score})
       .unwrap()
-      .then(
-        resp => {
-          console.log(resp);
-          dispatch(updatePlayers([resp]))
-        }
-      )
+      .then(resp => dispatch(updatePlayerScore({id: playerId, scores: resp.scores})));
     setScore(0);
   };
   
+  useEffect(() => {
+    setScoreString(getScoreString(score));
+  }, [score]);
+  
   return (
-    <div>xxxxxxxxxxxxxxx
-      <HStack>
+    <Box>
+      <Flex gap={2} flexWrap='wrap'>
         {
-          Buttons.map(score =>
-            <Button key={`score_${score}`} onClick={() => setScore(prevState => prevState + score)}>
-              {score}
+          Buttons.map(points =>
+            <Button w={6} key={`score_${points}`} onClick={() => setScore(prevState => prevState + points)}>
+              {getScoreString(points)}
             </Button>
           )
         }
-      </HStack>
-      
-      <p>SCORE TO ADD {score}</p>
-      
-      <Button flex="1" variant="ghost" leftIcon={<BiLike/>} onClick={addPointsForPlayer}>
-        Submit
-      </Button>
-      xxxxxxxxxxxxxxxxxx
-    </div>
+      </Flex>
+      <Flex mt={2} justify={'space-between'} >
+        <Button
+          variant='ghost'
+          w={'30%'}
+          isDisabled={!score}
+          onClick={addPointsForPlayer}>
+          <FontAwesomeIcon icon={faTrashCan}/>
+        </Button>
+          <Box
+            borderRadius='10px'
+            minW={'75px'}
+            px={2}
+            mx={8}
+            textAlign={'center'}
+            sx={{
+              border: '3px solid',
+              borderColor: score != 0 ? color :'#e3e3e3',
+          }}
+          >
+            <Text lineHeight={8} as='b'>
+              {scoreString}
+            </Text>
+          </Box>
+          <Button
+            variant='ghost'
+            onClick={() => setScore(0)}
+            isDisabled={!score}
+          >
+            Add
+          </Button>
+      </Flex>
+    
+    </Box>
   );
 };
