@@ -1,3 +1,9 @@
+export interface PlayerState {
+  players: {
+    [key: string]: Player
+  },
+}
+
 export interface Player {
   id: string,
   name: string,

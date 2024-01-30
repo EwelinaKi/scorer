@@ -15,7 +15,7 @@ export const gameSlice = createSlice({
   reducers: {
     createNew: (state, action: PayloadAction<GameState>) => {
       state.gameId = action.payload.gameId;
-      state.playerIds = [];
+      state.playerIds = action.payload.playerIds;
       state.startedAt = action.payload.startedAt;
       setCurrentGameId(action.payload.gameId);
     },

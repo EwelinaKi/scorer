@@ -15,11 +15,11 @@ export const MainContainer: FC = () => {
   const HC_INTERVAL = 60 * 1000 // 60sec
   const [gameId, setGameId] = useState<string>(getCurrentGameId());
   const [getGameData, getGameResponse] = useGetGameDataMutation();
-  const [getHealthCheck, healthCheckResponse] = useGetHealthCheckMutation();
+  const [getHealthCheck, healthCheckResponse] = useGetHealthCheckMutation(); // TODO loading screen
   const gameStartedAt = useAppSelector((state: RootState) => state.game.startedAt);
   const dispatch = useAppDispatch();
   
-  // prevent backend service to sleep
+  // prevent backend service to sleep TODO -> https://redux-toolkit.js.org/rtk-query/usage/polling
   useEffect(() => {
     setInterval(()=> {
       getHealthCheck();

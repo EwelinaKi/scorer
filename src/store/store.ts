@@ -1,16 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { api } from '../api/api';
-import counterReducer from './counterSlice';
 import gameReducer from './gameSlice';
-// import playersReducer from './playersSlice';
+import playerReducer from './playerSlice';
 // import movesReducer from './movesSlice';
 
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     game: gameReducer,
-    // players: playersReducer,
+    player: playerReducer,
     // moves: movesReducer,
     [api.reducerPath]: api.reducer,
   },

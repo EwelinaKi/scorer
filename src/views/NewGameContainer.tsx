@@ -15,7 +15,6 @@ export const NewGameContainer: FC<NewGameContainerProps> = ({setGameId}) => {
   const dispatch = useAppDispatch();
   
   useEffect(() => {
-    console.log(gameResponse)
     if (gameResponse.status === QueryStatus.fulfilled && gameResponse.data?.gameId) {
       dispatch(createNew(gameResponse.data));
       setGameId(gameResponse.data.gameId);

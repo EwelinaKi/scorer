@@ -1,4 +1,5 @@
 import { GameState } from '../types/game.types';
+import { Player, PostNewPlayerBody } from '../types/player.types';
 import { api } from './api';
 
 
@@ -21,6 +22,15 @@ export const gameApi = api.injectEndpoints({
         };
       },
     }),
+    addPlayer: builder.mutation<Player, { gameId: string, body: PostNewPlayerBody }>({
+      query: ({gameId, body}) => {
+        return {
+          url: `games/${gameId}/player`,
+          method: 'POST',
+          body,
+        };
+      },
+    }),
   }),
   overrideExisting: false,
 });
@@ -28,4 +38,5 @@ export const gameApi = api.injectEndpoints({
 export const {
   useGetGameDataMutation,
   usePostNewGameMutation,
+  useAddPlayerMutation,
 } = gameApi;

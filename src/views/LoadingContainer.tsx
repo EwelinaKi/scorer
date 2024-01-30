@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 
-export const LoadingScreen: FC = () => {
+export const LoadingContainer: FC = () => {
   return (
     <div>initialise screen</div>
   )
