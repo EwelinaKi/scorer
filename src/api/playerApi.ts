@@ -1,19 +1,29 @@
+import { BaseQueryMeta, BaseQueryResult } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 import { GameState } from '../types/game.types';
-import { Player } from '../types/player.types';
+import { Player, PostPlayerScore } from '../types/player.types';
 import { api } from './api';
 
 
 export const playerApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getPlayer: builder.mutation<Player, string>({
-      query: (gameId) => `players/${gameId}`,
+      query: (gameId: string) => `players/${gameId}`,
     }),
-    changePlayersScore: builder.mutation<GameState, void>({
-      query: () => {
+    changePlayersScore: builder.mutation<Player, PostPlayerScore>({
+      query: ({playerId, score}) => {
         return {
-          url: 'games',
+          url: `players/${playerId}/score`,
           method: 'POST',
+          body: {
+            score
+          }
         };
+      },
+      transformResponse: (resp: Player, meta, arg): Player => {
+        return {
+          ...resp,
+          id: arg.playerId,
+        }
       },
     }),
   }),

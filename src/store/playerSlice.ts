@@ -10,17 +10,6 @@ export const playerSlice = createSlice({
   name: 'player',
   initialState,
   reducers: {
-    addPlayer: (state, action: PayloadAction<Player>) => {
-      state.players = {
-        ...state.players,
-        [action.payload.id]: {
-          id: action.payload.id,
-          name: action.payload.name,
-          color: action.payload.color,
-          scores: action.payload.scores,
-        }
-      }
-    },
     updatePlayers: (state, action: PayloadAction<Player[]>) => {
       const playersToUpdate = action.payload.reduce( (acc, curr) => {
         return {
@@ -34,16 +23,11 @@ export const playerSlice = createSlice({
         ...playersToUpdate,
       }
     },
-    changeScore: (state, action: PayloadAction<void>) => {
-      // todo
-    },
   }
 });
 
 export const {
-  addPlayer,
   updatePlayers,
-  changeScore,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;

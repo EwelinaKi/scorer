@@ -12,3 +12,8 @@ export interface Player {
 }
 
 export type PostNewPlayerBody = Pick<Player, 'name' | 'color'>;
+
+export interface PostPlayerScore {
+  playerId: string,
+  score: number,
+}
