@@ -1,12 +1,25 @@
 import { Player, PostPlayerScore } from '../types/player.types';
 import { api } from './api';
+import { createAvatar } from '@dicebear/core';
+import { bottts } from '@dicebear/collection';
+import { GameColors } from '../types/color.types';
 
 
 export const playerApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getPlayer: builder.mutation<Player, string>({
       query: (gameId: string) => `players/${gameId}`,
-      // todo transform resp to return players object with avatars
+      transformResponse: (resp: Player): Player => {
+        const avatar = createAvatar(bottts, {
+          seed: resp.name,
+          randomizeIds: true,
+          baseColor: [GameColors[resp.color].avatar],
+        }).toDataUriSync();
+        return {
+          ...resp,
+          avatar,
+        }
+      }
     }),
     changePlayersScore: builder.mutation<Player, PostPlayerScore>({
       query: ({playerId, score}) => {

@@ -9,6 +9,7 @@ import { RootState } from '../store/store';
 import { Player } from '../types/player.types';
 import { AddPlayerModal } from './modals/AddPlayerModal';
 import { PlayerCard } from './PlayerCard';
+import { PlayersEmptyList } from './PlayersEmptyList';
 
 
 export const Players: FC = () => {
@@ -41,7 +42,7 @@ export const Players: FC = () => {
         <Button
           size='sm'
           variant='solid'
-          color={Object.keys(players).length ? 'gray.500': 'pink.500'}
+          color={Object.keys(players).length ? 'gray.500' : 'pink.500'}
           onClick={onOpenAddPlayerModal}
         >
           <FontAwesomeIcon icon={faUserPlus} />
@@ -49,9 +50,12 @@ export const Players: FC = () => {
         <Text as='b' ml={2} fontSize='2xl'>Players</Text>
       </HStack>
       <Flex mt={2} justify={'space-around'} flexWrap='wrap'>
-        {Object.keys(players).map(id => <PlayerCard key={id} {...players[id]}/>)}
+        {Object.keys(players).map(id => <PlayerCard key={id} {...players[id]} />)}
       </Flex>
-      <AddPlayerModal isOpen={isAddPlayerModalOpen} closeModal={onCloseAddPlayerModal}/>
+      
+      {!Object.keys(players).length && <PlayersEmptyList />}
+      
+      <AddPlayerModal isOpen={isAddPlayerModalOpen} closeModal={onCloseAddPlayerModal} />
     </Box>
   );
 };

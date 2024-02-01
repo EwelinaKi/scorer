@@ -47,23 +47,23 @@ export const GameContainer: FC<GameContainerProps> = ({resetGameId}) => {
         'footer footer footer'
         `,
       ]}
-      gridTemplateColumns={['1fr', '1fr', '1fr 1fr', '1fr 1fr','1fr 1fr 1fr']}
-      gap="4"
+      gridTemplateColumns={['1fr', '1fr', '1fr 1fr', '1fr 1fr', '1fr 1fr 1fr']}
+      gap='4'
     >
       <GridItem area={'header'}>
-        <Header resetGameId={resetGameId}/>
+        <Header resetGameId={resetGameId} />
       </GridItem>
-      <GridItem bg='pink.300' area={'leaderboard'} minW='360px'>
-        <LeaderBoard/>
+      <GridItem area={'leaderboard'} minW='360px'>
+        <LeaderBoard />
       </GridItem>
       <GridItem area={'players'} minW={['360px', '360px', '680px']}>
-        <Players/>
+        <Players />
       </GridItem>
-      <GridItem bg='blue.300' area={'moves'} minW='360px' >
-        <Moves/>
+      <GridItem area={'moves'} minW='360px'>
+        <Moves />
       </GridItem>
-      <GridItem bg={['yellow.300', 'orange.300', 'red.300', 'pink.300', 'purple.300']} area={'footer'}>
-        <Footer/>
+      <GridItem area={'footer'}>
+        <Footer />
       </GridItem>
     </Grid>
   );

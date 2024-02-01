@@ -5,6 +5,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useChangePlayersScoreMutation } from '../api/playerApi';
 import { useAppDispatch } from '../store/hooks';
 import { updatePlayerScore } from '../store/playerSlice';
+import { GameColors } from '../types/color.types';
 
 
 const Buttons = [1, 2, 5, 10, 20, 50, -1, -2, -5, -10, -20, -50];
@@ -52,36 +53,36 @@ export const ScoreWrapper: FC<ScoreWrapperProps> = ({playerId, color}) => {
           )
         }
       </Flex>
-      <Flex mt={2} justify={'space-between'} >
+      <Flex mt={2} justify={'space-between'}>
         <Button
           variant='ghost'
           w={'30%'}
           isDisabled={!score}
-          onClick={addPointsForPlayer}>
-          <FontAwesomeIcon icon={faTrashCan}/>
+          onClick={() => setScore(0)}>
+          <FontAwesomeIcon icon={faTrashCan} />
         </Button>
-          <Box
-            borderRadius='10px'
-            minW={'75px'}
-            px={2}
-            mx={8}
-            textAlign={'center'}
-            sx={{
-              border: '3px solid',
-              borderColor: score != 0 ? color :'#e3e3e3',
+        <Box
+          borderRadius='10px'
+          minW={'75px'}
+          px={2}
+          mx={8}
+          textAlign={'center'}
+          sx={{
+            border: '3px solid',
+            borderColor: score != 0 ? GameColors[color].background : '#e3e3e3',
           }}
-          >
-            <Text lineHeight={8} as='b'>
-              {scoreString}
-            </Text>
-          </Box>
-          <Button
-            variant='ghost'
-            onClick={() => setScore(0)}
-            isDisabled={!score}
-          >
-            Add
-          </Button>
+        >
+          <Text lineHeight={8} as='b'>
+            {scoreString}
+          </Text>
+        </Box>
+        <Button
+          variant='ghost'
+          isDisabled={!score}
+          onClick={addPointsForPlayer}
+        >
+          Add
+        </Button>
       </Flex>
     
     </Box>

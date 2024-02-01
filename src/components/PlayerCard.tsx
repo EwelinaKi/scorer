@@ -13,15 +13,22 @@ import {
 import { BsThreeDotsVertical } from 'react-icons/all';
 import { Player } from '../types/player.types';
 import { ScoreWrapper } from './ScoreWrapper';
+import { GameColors } from '../types/color.types';
 
 
-export const PlayerCard: FC<Player> = ({color, id, name, scores}) => {
+export const PlayerCard: FC<Player> = ({color, id, name, scores, avatar}) => {
   return (
     <Card maxW='xs' margin={2}>
       <CardHeader>
         <Flex>
-          <Flex flex='1' gap="4" alignItems='center' flexWrap='wrap'>
-            <Avatar name='Segun Adebayo' src='https://bit.ly/sage-adebayo'/>
+          <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
+            <Box
+              borderRadius='50%'
+              borderColor={GameColors[color].background}
+              borderWidth='3px' p='2px'
+            >
+              <Avatar name={name} src={avatar} size='md' />
+            </Box>
             <Box>
               <Heading size='sm'>{name}</Heading>
               <Text as='i'>score: {scores?.reduce((acc, curr) => acc + curr, 0)}</Text>
@@ -32,12 +39,12 @@ export const PlayerCard: FC<Player> = ({color, id, name, scores}) => {
             colorScheme='gray'
             aria-label='See menu'
             isDisabled={true}
-            icon={<BsThreeDotsVertical/>}
+            icon={<BsThreeDotsVertical />}
           />
         </Flex>
       </CardHeader>
       <CardBody pt='0'>
-        <ScoreWrapper playerId={id} color={color}/>
+        <ScoreWrapper playerId={id} color={color} />
       </CardBody>
     </Card>
   );

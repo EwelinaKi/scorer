@@ -44,8 +44,7 @@ export const AddPlayerModal: FC<AddPlayerModalProps> = ({isOpen, closeModal}) =>
         color: selectedColor,
         name: playerName,
       }
-    })
-    onCloseModal();
+    });
   };
   
   const onCloseModal = () => {
@@ -66,52 +65,53 @@ export const AddPlayerModal: FC<AddPlayerModalProps> = ({isOpen, closeModal}) =>
   useEffect(() => {
     if (playerResp.status === QueryStatus.fulfilled) {
       dispatch(updatePlayers([{...playerResp.data, avatar}]));
+      onCloseModal();
     }
   }, [playerResp]);
   
   return (
     <Modal
       onClose={onCloseModal}
-      size="sm"
+      size='sm'
       isOpen={isOpen}
       initialFocusRef={initialRef}
     >
-      <ModalOverlay/>
+      <ModalOverlay />
       <ModalContent>
         <ModalHeader>Add new player</ModalHeader>
-        <ModalCloseButton/>
+        <ModalCloseButton />
         <ModalBody>
           <HStack>
             <Box h='80px' w='80px'>
-              <img src={avatar} alt="Avatar" style={{opacity: playerName && selectedColor ? '1' : '0.2'}}/>
+              <img src={avatar} alt='Avatar' style={{opacity: playerName && selectedColor ? '1' : '0.2'}} />
             </Box>
-              <Input
-                variant="flushed"
-                placeholder="player's name"
-                ref={initialRef}
-                onChange={(el: ChangeEvent<HTMLInputElement>) => setPlayerName(el.target.value)}
-              />
+            <Input
+              variant='flushed'
+              placeholder="player's name"
+              ref={initialRef}
+              onChange={(el: ChangeEvent<HTMLInputElement>) => setPlayerName(el.target.value)}
+            />
           </HStack>
-          <ColorSelector onColorChange={setSelectedColor}/>
+          <ColorSelector onColorChange={setSelectedColor} />
         </ModalBody>
         <ModalFooter>
           <Button
             onClick={onCloseModal}
             m={2}
-            size="sm"
-            variant="outline"
+            size='sm'
+            variant='outline'
           >
             Cancel
           </Button>
           <Button
             onClick={() => onSaveClick()}
             m={2}
-            size="sm"
-            variant="solid"
-            colorScheme="gray"
+            size='sm'
+            variant='solid'
+            colorScheme='gray'
             isDisabled={!playerName || !selectedColor}
           >
-            Save & Close
+            Save
           </Button>
         </ModalFooter>
       </ModalContent>
