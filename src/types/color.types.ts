@@ -31,8 +31,7 @@ export enum ColorName {
   BROWN = 'BROWN',
   BLACK = 'BLACK',
   WHITE = 'WHITE',
-};
-
+}
 
 export const GameColors: Colors = {
   GOLD: {

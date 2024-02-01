@@ -1,7 +1,7 @@
+import { FC, useEffect, useState } from 'react';
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { FC, useEffect, useState } from 'react';
 import { useChangePlayersScoreMutation } from '../api/playerApi';
 import { useAppDispatch } from '../store/hooks';
 import { updatePlayerScore } from '../store/playerSlice';
