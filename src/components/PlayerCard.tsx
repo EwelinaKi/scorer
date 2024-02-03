@@ -16,7 +16,7 @@ import { ScoreWrapper } from './ScoreWrapper';
 import { GameColors } from '../types/color.types';
 
 
-export const PlayerCard: FC<Player> = ({color, id, name, scores, avatar}) => {
+export const PlayerCard: FC<Player> = ({color, id, name, totalScore, avatar}) => {
   return (
     <Card maxW='xs' margin={2}>
       <CardHeader>
@@ -31,7 +31,7 @@ export const PlayerCard: FC<Player> = ({color, id, name, scores, avatar}) => {
             </Box>
             <Box>
               <Heading size='sm'>{name}</Heading>
-              <Text as='i'>score: {scores?.reduce((acc, curr) => acc + curr, 0)}</Text>
+              <Text as='i'>score: {totalScore}</Text>
             </Box>
           </Flex>
           <IconButton

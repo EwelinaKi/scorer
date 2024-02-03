@@ -6,6 +6,7 @@ import { useChangePlayersScoreMutation } from '../api/playerApi';
 import { useAppDispatch } from '../store/hooks';
 import { updatePlayerScore } from '../store/playerSlice';
 import { GameColors } from '../types/color.types';
+import { addMove } from '../store/movesSlice';
 
 
 const Buttons = [1, 2, 5, 10, 20, 50, -1, -2, -5, -10, -20, -50];
@@ -28,13 +29,25 @@ export const ScoreWrapper: FC<ScoreWrapperProps> = ({playerId, color}) => {
   
   const [score, setScore] = useState(0);
   const [scoreString, setScoreString] = useState(getScoreString(0));
-  const [postNewScore, newScoreResp] = useChangePlayersScoreMutation();
+  const [postNewScore] = useChangePlayersScoreMutation();
   const dispatch = useAppDispatch();
   
   const addPointsForPlayer = () => {
     postNewScore({playerId, score})
       .unwrap()
-      .then(resp => dispatch(updatePlayerScore({id: playerId, scores: resp.scores})));
+      .then(resp => {
+          dispatch(updatePlayerScore({
+            id: playerId,
+            scores: resp.scores,
+            totalScore: resp.totalScore,
+          }));
+          dispatch(addMove({
+            playerId,
+            partialScore: score,
+            timestamp: Date.now(),
+          }))
+        }
+      );
     setScore(0);
   };
   
@@ -84,7 +97,6 @@ export const ScoreWrapper: FC<ScoreWrapperProps> = ({playerId, color}) => {
           Add
         </Button>
       </Flex>
-    
     </Box>
   );
 };

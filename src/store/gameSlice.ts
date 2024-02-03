@@ -19,22 +19,11 @@ export const gameSlice = createSlice({
       state.startedAt = action.payload.startedAt;
       setCurrentGameId(action.payload.gameId);
     },
-    updatePlayerIds: (state, action: PayloadAction<string[]>) => {
-      state.playerIds = action.payload;
-    },
-    resetGame: (state) => {
-      state.gameId = initialState.gameId;
-      state.playerIds = initialState.playerIds;
-      state.startedAt = initialState.startedAt;
-      resetCurrentGameId();
-    },
   }
 });
 
 export const {
   createNew,
-  updatePlayerIds,
-  resetGame,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

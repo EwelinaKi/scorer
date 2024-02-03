@@ -2,14 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { api } from '../api/api';
 import gameReducer from './gameSlice';
 import playerReducer from './playerSlice';
-// import movesReducer from './movesSlice';
+import movesReducer from './movesSlice';
 
 
 export const store = configureStore({
   reducer: {
     game: gameReducer,
     player: playerReducer,
-    // moves: movesReducer,
+    moves: movesReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>

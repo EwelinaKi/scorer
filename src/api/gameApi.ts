@@ -30,6 +30,12 @@ export const gameApi = api.injectEndpoints({
           body,
         };
       },
+      transformResponse: (resp: Player): Player => {
+        return {
+          ...resp,
+          totalScore: 0,
+        };
+      }
     }),
   }),
   overrideExisting: false,

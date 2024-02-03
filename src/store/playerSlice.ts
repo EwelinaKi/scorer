@@ -11,32 +11,32 @@ export const playerSlice = createSlice({
   initialState,
   reducers: {
     updatePlayers: (state, action: PayloadAction<Player[]>) => {
-      const playersToUpdate = action.payload.reduce( (acc, curr) => {
+      const playersToUpdate = action.payload.reduce((acc, curr) => {
         return {
           ...acc,
           [curr.id]: curr
-        }
+        };
       }, {});
       
       state.players = {
         ...state.players,
         ...playersToUpdate,
-      }
+      };
     },
     updatePlayerScore: (state, action: PayloadAction<UpdatePlayerScore>) => {
       const id = action.payload.id;
-      
       const playerToUpdate = {
         [id]: {
           ...state.players[id],
-          scores: action.payload.scores
+          scores: action.payload.scores,
+          totalScore: action.payload.totalScore,
         }
       };
       
       state.players = {
         ...state.players,
         ...playerToUpdate,
-      }
+      };
     },
   }
 });

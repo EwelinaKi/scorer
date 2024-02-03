@@ -1,6 +1,10 @@
 export interface Move {
   partialScore: number,
-  totalScore: number,
   playerId: string,
-  timeStamp: number,
+  timestamp: number,
 }
+
+export interface MovesState {
+  moves: Move[],
+}
+

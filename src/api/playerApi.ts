@@ -4,6 +4,7 @@ import { createAvatar } from '@dicebear/core';
 import { bottts } from '@dicebear/collection';
 import { GameColors } from '../types/color.types';
 
+const countTotalScore = (scores: number[]) => scores.reduce((acc, curr) => acc + curr, 0);
 
 export const playerApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,7 +19,8 @@ export const playerApi = api.injectEndpoints({
         return {
           ...resp,
           avatar,
-        }
+          totalScore: countTotalScore(resp.scores),
+        };
       }
     }),
     changePlayersScore: builder.mutation<Player, PostPlayerScore>({
@@ -36,7 +38,8 @@ export const playerApi = api.injectEndpoints({
         return {
           ...resp,
           id: arg.playerId,
-        }
+          totalScore: countTotalScore(resp.scores),
+        };
       },
     }),
   }),
