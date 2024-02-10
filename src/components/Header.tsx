@@ -45,7 +45,7 @@ export const Header: FC<GameHeaderProps> = ({resetGameId}) => {
             colorScheme='blackAlpha'
             onClick={onOpenFinishModal}
           >
-            <FontAwesomeIcon icon={faArrowsRotate} color='pink'/>
+            <FontAwesomeIcon icon={faArrowsRotate} />
           </Button>
         </Text>
       </Flex>

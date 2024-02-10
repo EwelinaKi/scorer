@@ -1,5 +1,5 @@
 import { Grid, GridItem } from '@chakra-ui/react';
-import { Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, FC, SetStateAction, useRef } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { LeaderBoard } from '../components/LeaderBoard';
@@ -12,6 +12,8 @@ interface GameContainerProps {
 }
 
 export const GameContainer: FC<GameContainerProps> = ({resetGameId}) => {
+  const leadersContainerRef = useRef<HTMLInputElement>(null);
+  
   return (
     <Grid
       templateAreas={[
@@ -53,14 +55,14 @@ export const GameContainer: FC<GameContainerProps> = ({resetGameId}) => {
       <GridItem area={'header'}>
         <Header resetGameId={resetGameId} />
       </GridItem>
-      <GridItem area={'leaderboard'} minW='360px'>
+      <GridItem area={'leaderboard'} minW='360px' ref={leadersContainerRef}>
         <LeaderBoard />
       </GridItem>
       <GridItem area={'players'} minW={['360px', '360px', '680px']}>
         <Players />
       </GridItem>
       <GridItem area={'moves'} minW='360px'>
-        <Moves />
+        <Moves height={leadersContainerRef?.current?.offsetHeight || 100}/>
       </GridItem>
       <GridItem area={'footer'}>
         <Footer />

@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Box } from '@chakra-ui/react';
 import { QueryStatus } from '@reduxjs/toolkit/query';
-import { getCurrentGameId } from '../api/gameApi';
+import { getCurrentGameId, resetCurrentGameId } from '../api/gameApi';
 import { useGetGameDataMutation } from '../api/gameApi';
 import { useGetHealthCheckMutation } from '../api/healthCheckApi';
 import { createNew } from '../store/gameSlice';
@@ -44,6 +44,7 @@ export const MainContainer: FC = () => {
   }, [getGameResponse, dispatch]);
   
   const resetGame = () => {
+    resetCurrentGameId();
     setGameId('');
   };
   

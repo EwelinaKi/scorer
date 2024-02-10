@@ -30,7 +30,7 @@ export const Players: FC = () => {
   };
   
   useEffect(() => {
-    if (!Object.keys(players).length && playersIds.length) {
+    if ( playersIds?.length && !Object.keys(players).length) {
       getAllPlayersData()
         .then(allPlayersData => dispatch(updatePlayers(allPlayersData)));
     }

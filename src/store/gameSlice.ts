@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { resetCurrentGameId, setCurrentGameId } from '../api/gameApi';
+import { setCurrentGameId } from '../api/gameApi';
 import { GameState } from '../types/game.types';
+import { revertAll } from './store';
 
 
 const initialState: GameState = {
@@ -12,6 +13,7 @@ const initialState: GameState = {
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
+  extraReducers: (builder) => builder.addCase(revertAll, () => initialState),
   reducers: {
     createNew: (state, action: PayloadAction<GameState>) => {
       state.gameId = action.payload.gameId;

@@ -1,9 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, createAction } from '@reduxjs/toolkit';
 import { api } from '../api/api';
 import gameReducer from './gameSlice';
 import playerReducer from './playerSlice';
 import movesReducer from './movesSlice';
 
+export const revertAll = createAction('REVERT_ALL');
 
 export const store = configureStore({
   reducer: {

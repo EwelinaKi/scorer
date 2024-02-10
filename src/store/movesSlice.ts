@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { Move, MovesState } from '../types/moves.types';
+import { revertAll } from './store';
 
 
 const initialState: MovesState = {
@@ -9,11 +10,12 @@ const initialState: MovesState = {
 export const movesSlice = createSlice({
   name: 'moves',
   initialState,
+  extraReducers: (builder) => builder.addCase(revertAll, () => initialState),
   reducers: {
     addMove: (state, action: PayloadAction<Move>) => {
       state.moves = [
-        ...state.moves,
         action.payload,
+        ...state.moves,
       ];
     },
   }

@@ -1,10 +1,9 @@
 import { FC, useEffect, useState } from 'react';
-import { Box, Card, Flex, HStack, Text, Center, AvatarGroup, Avatar, AvatarBadge } from '@chakra-ui/react';
+import { Card, Flex, HStack, Text, Avatar, AvatarBadge } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { Player } from '../types/player.types';
 import { useAppSelector } from '../store/hooks';
-import { RootState } from '../store/store';
 import { GameColors } from '../types/color.types';
 
 

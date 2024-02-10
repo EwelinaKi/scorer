@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { Player, PlayerState, UpdatePlayerScore } from '../types/player.types';
+import { revertAll } from './store';
 
 
 const initialState: PlayerState = {
@@ -9,6 +10,7 @@ const initialState: PlayerState = {
 export const playerSlice = createSlice({
   name: 'player',
   initialState,
+  extraReducers: (builder) => builder.addCase(revertAll, () => initialState),
   reducers: {
     updatePlayers: (state, action: PayloadAction<Player[]>) => {
       const playersToUpdate = action.payload.reduce((acc, curr) => {

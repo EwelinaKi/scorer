@@ -8,6 +8,8 @@ import {
   ModalOverlay
 } from '@chakra-ui/react';
 import React, { Dispatch, FC, SetStateAction } from 'react';
+import { revertAll } from '../../store/store';
+import { useAppDispatch } from '../../store/hooks';
 
 
 interface FinishGameModalProps {
@@ -17,7 +19,10 @@ interface FinishGameModalProps {
 }
 
 export const FinishGameModal: FC<FinishGameModalProps> = ({isOpen, onClose, resetGameId}) => {
+  const dispatch = useAppDispatch();
+  
   const onResetClick = () => {
+    dispatch(revertAll());
     resetGameId();
   };
   
