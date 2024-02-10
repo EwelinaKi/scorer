@@ -12,7 +12,7 @@ import { NewGameContainer } from './NewGameContainer';
 
 
 export const MainContainer: FC = () => {
-  const HC_INTERVAL = 60 * 1000 // 60sec
+  const HC_INTERVAL = 60 * 1000; // 60sec
   const [gameId, setGameId] = useState<string>(getCurrentGameId());
   const [getGameData, getGameResponse] = useGetGameDataMutation();
   const [getHealthCheck, healthCheckResponse] = useGetHealthCheckMutation(); // TODO loading screen
@@ -21,7 +21,7 @@ export const MainContainer: FC = () => {
   
   // prevent backend service to sleep TODO -> https://redux-toolkit.js.org/rtk-query/usage/polling
   useEffect(() => {
-    setInterval(()=> {
+    setInterval(() => {
       getHealthCheck();
     }, HC_INTERVAL);
   }, []);
@@ -50,8 +50,8 @@ export const MainContainer: FC = () => {
   
   return (
     <Box>
-      {gameId && <GameContainer resetGameId={resetGame}/>}
-      {!gameId && <NewGameContainer setGameId={setGameId}/>}
+      {gameId && <GameContainer resetGameId={resetGame} />}
+      {!gameId && <NewGameContainer setGameId={setGameId} />}
     </Box>
   );
 };

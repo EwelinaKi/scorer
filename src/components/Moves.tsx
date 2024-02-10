@@ -19,7 +19,7 @@ export const Moves: FC<{ height: number }> = ({height}) => {
         <FontAwesomeIcon icon={faMonument} />
         <Text as='b' ml={2} fontSize='2xl'>Moves</Text>
       </HStack>
-      <Box height={`${height - 30}px`} overflow='scroll'>
+      <Box height={`300px`} overflow='scroll'>
       {
         moves.map(move =>
           <Flex key={move.timestamp} alignItems='center' >
